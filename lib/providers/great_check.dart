@@ -15,17 +15,17 @@ class GreatCheck with ChangeNotifier {
 
 
   void addCheck(
-    String pickedPayTo,
-    String pickedBankName,
-    double pickedAmount,
-    // DateTime pickedDate,
-  ) {
+      String pickedPayTo,
+      String pickedBankName,
+      double pickedAmount,
+      DateTime pickedDate,
+      ) {
     final newCheck = Check(
       id: DateTime.now().toString(),
       payTo: pickedPayTo,
       bankName: pickedBankName,
       amount: pickedAmount,
-      // date: pickedDate,
+      date: pickedDate.toString(),
     );
     _items.add(newCheck);
     notifyListeners();
@@ -36,7 +36,7 @@ class GreatCheck with ChangeNotifier {
       'payTo': newCheck.payTo,
       'bankName': newCheck.bankName,
       'amount': newCheck.amount,
-      // 'date': newCheck.date,
+      'date': newCheck.date,
     });
   }
 
@@ -46,13 +46,13 @@ class GreatCheck with ChangeNotifier {
     _items = dataList
         .map(
           (item) => Check(
-            id: item['id'],
-            payTo: item['payTo'],
-            bankName: item['bankName'],
-            amount: item['amount'],
-            // date: item['date'],
-          ),
-        )
+        id: item['id'],
+        payTo: item['payTo'],
+        bankName: item['bankName'],
+        amount: item['amount'],
+        date: item['date'],
+      ),
+    )
         .toList();
     notifyListeners();
   }

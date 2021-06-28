@@ -7,10 +7,10 @@ class DBHelper {
     final dbPath = await sql.getDatabasesPath();
     return await sql.openDatabase(path.join(dbPath, 'checks.db'),
         onCreate: (db, version) {
-      //وقتی میخوایم مشخص کنیم table ما چه فیلد هایی داشته باشه
-      return db.execute(
-          'CREATE TABLE user_checks(id TEXT PRIMARY KEY, payTo TEXT, bankName TEXT, amount DOUBLE)');
-    }, version: 1);
+          //وقتی میخوایم مشخص کنیم table ما چه فیلد هایی داشته باشه
+          return db.execute(
+              'CREATE TABLE user_checks(id TEXT PRIMARY KEY, payTo TEXT, bankName TEXT, amount DOUBLE, date TEXT)');
+        }, version: 1);
   }
 
   //برای اضافه کردن اطلاعات به دیتابیس از متد زیر استفاده میکنیم

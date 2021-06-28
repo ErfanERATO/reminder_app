@@ -5,13 +5,13 @@ class Check {
   final String payTo;
   final String bankName;
   final double amount;
-  // final DateTime date;
+  final String date;
 
   Check(
       {required this.id,
-      required this.payTo,
-      required this.bankName,
-      required this.amount,
-      // required this.date,
-  });
+        required this.payTo,
+        required this.bankName,
+        required this.amount,
+        required this.date,
+      });
 }

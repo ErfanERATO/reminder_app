@@ -13,7 +13,6 @@ class AddCheckScreen extends StatefulWidget {
 }
 
 class _AddCheckScreenState extends State<AddCheckScreen> {
-
   //ساخت تقویم برای نمایش تاریخ
   void _presentDatePicker() {
     showDatePicker(
@@ -32,8 +31,21 @@ class _AddCheckScreenState extends State<AddCheckScreen> {
     print('xxxx');
   }
 
+  //ساخت انتخاب ساعت
+  Future pickTime(BuildContext context) async {
+    final initialTime = TimeOfDay(hour: 9, minute: 0);
+    final newTime = await showTimePicker(
+      context: context,
+      initialTime: _time ?? initialTime,
+    );
+    if (newTime == null) return;
+    setState(() {
+      _time = newTime;
+    });
+  }
 
   DateTime? _selectedDate;
+  TimeOfDay? _time;
   final _payToController = TextEditingController();
   final _bankNameController = TextEditingController();
   final _amountController = TextEditingController();
@@ -43,17 +55,20 @@ class _AddCheckScreenState extends State<AddCheckScreen> {
     final enteredBankName = _bankNameController.text;
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredPayTo.isEmpty || enteredBankName.isEmpty || enteredAmount <=0 || _selectedDate == null){
+    if (enteredPayTo.isEmpty ||
+        enteredBankName.isEmpty ||
+        enteredAmount <= 0 ||
+        _selectedDate == null ||
+        _time == null) {
       return;
     }
-    // if (enteredPayTo.isEmpty || enteredBankName.isEmpty || enteredAmount <=0 || _selectedDate == null){
-    //   return;
-    // }
-    // Provider.of<GreatCheck>(context, listen: false)
-    //     .addCheck(_payToController.text, _bankNameController.text, double.parse(_amountController.text),_selectedDate!,);
-    // Navigator.of(context).pop();
-    Provider.of<GreatCheck>(context, listen: false)
-        .addCheck(_payToController.text, _bankNameController.text, double.parse(_amountController.text) , _selectedDate!,);
+    Provider.of<GreatCheck>(context, listen: false).addCheck(
+      _payToController.text,
+      _bankNameController.text,
+      double.parse(_amountController.text),
+      _selectedDate!,
+      _time!,
+    );
     Navigator.of(context).pop();
   }
 
@@ -106,6 +121,28 @@ class _AddCheckScreenState extends State<AddCheckScreen> {
                               ),
                             ),
                             onPressed: _presentDatePicker,
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //فیلد دریافت زمان ورودی کاربر
+                    Container(
+                      height: 50,
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: Text(_time == null
+                                  ? 'هنوز زمانی انتخاب نشده'
+                                  : '${_time!.hour}:${_time!.minute}')),
+                          TextButton(
+                            child: Text(
+                              'زمان را مشخص کنید',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () => pickTime(context),
                           ),
                         ],
                       ),

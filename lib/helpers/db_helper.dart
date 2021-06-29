@@ -9,7 +9,7 @@ class DBHelper {
         onCreate: (db, version) {
           //وقتی میخوایم مشخص کنیم table ما چه فیلد هایی داشته باشه
           return db.execute(
-              'CREATE TABLE user_checks(id TEXT PRIMARY KEY, payTo TEXT, bankName TEXT, amount DOUBLE, date TEXT)');
+              'CREATE TABLE user_checks(id TEXT PRIMARY KEY, payTo TEXT, bankName TEXT, amount DOUBLE, date TEXT, time TEXT)');
         }, version: 1);
   }
 

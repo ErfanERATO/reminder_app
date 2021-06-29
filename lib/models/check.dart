@@ -6,12 +6,14 @@ class Check {
   final String bankName;
   final double amount;
   final String date;
+  final String time;
 
-  Check(
-      {required this.id,
-        required this.payTo,
-        required this.bankName,
-        required this.amount,
-        required this.date,
-      });
+  Check({
+    required this.id,
+    required this.payTo,
+    required this.bankName,
+    required this.amount,
+    required this.date,
+    required this.time,
+  });
 }

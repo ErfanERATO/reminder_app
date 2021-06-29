@@ -3,6 +3,7 @@
 // import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:check_final_way/helpers/db_helper.dart';
+import 'package:flutter/material.dart';
 import '../models/check.dart';
 
 class GreatCheck with ChangeNotifier {
@@ -13,12 +14,12 @@ class GreatCheck with ChangeNotifier {
     return [..._items];
   }
 
-
   void addCheck(
       String pickedPayTo,
       String pickedBankName,
       double pickedAmount,
       DateTime pickedDate,
+      TimeOfDay pickedTime,
       ) {
     final newCheck = Check(
       id: DateTime.now().toString(),
@@ -26,10 +27,10 @@ class GreatCheck with ChangeNotifier {
       bankName: pickedBankName,
       amount: pickedAmount,
       date: pickedDate.toString(),
+      time: pickedTime.toString(),
     );
     _items.add(newCheck);
     notifyListeners();
-
 
     DBHelper.insert('user_checks', {
       'id': newCheck.id,
@@ -37,9 +38,9 @@ class GreatCheck with ChangeNotifier {
       'bankName': newCheck.bankName,
       'amount': newCheck.amount,
       'date': newCheck.date,
+      'time': newCheck.time,
     });
   }
-
 
   Future<void> fetchAndSetChecks() async {
     final dataList = await DBHelper.getData('user_checks');
@@ -51,6 +52,7 @@ class GreatCheck with ChangeNotifier {
         bankName: item['bankName'],
         amount: item['amount'],
         date: item['date'],
+        time: item['time'],
       ),
     )
         .toList();

@@ -97,16 +97,15 @@ class CheckListScreen extends StatelessWidget {
                           color: Colors.blueGrey),
                     ),
 
-                    // DateFormat.yMMMd()
-                    //     .format(greatCheck.items[i].date)).toString(),
-                    //فیلد نمایش ساعت انتخابی توسط کاربر
-                    // Text(
-                    //   'زمان یادآوری: ',
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.bold,
-                    //       fontSize: 15,
-                    //       color: Colors.blueGrey),
-                    // ),
+                    //فیلد نمایش ساع انتخابی کاربر
+                    Text(
+                      'ساعت یادآوری: ' +
+                          greatCheck.items[i].time.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.blueGrey),
+                    ),
                   ],
                 ),
               ),
